@@ -27,7 +27,7 @@
 - [x] Tạo `Prompts/ModelConfig.cs` — nơi duy nhất chứa 4 model ID theo Fallback Chain
 - [ ] Implement `Services/FallbackChainService.cs` — điều phối gọi lần lượt
       theo đúng thứ tự ở `03-API-SPEC.md` mục 2
-- [ ] Đặt System Prompt cố định trong `Prompts/SystemPrompts.cs` (copy nguyên
+- [x] Đặt System Prompt cố định trong `Prompts/SystemPrompts.cs` (copy nguyên
       văn từ `03-API-SPEC.md` mục 3)
 - [ ] Khai báo route `POST /api/chat` trong `Program.cs`
 - [ ] **Test bằng tay** (Postman/curl): gửi request mẫu `"uchi ni"`, xác nhận

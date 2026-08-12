@@ -21,7 +21,7 @@
 - [x] Tạo `Models/ChatRequest.cs`, `Models/ChatResponse.cs`,
       `Models/MessageDto.cs` theo schema ở `03-API-SPEC.md`
 - [x] Tạo `Services/IAiProviderService.cs` (interface chung cho mọi provider)
-- [ ] Implement `Services/GroqProviderService.cs` — gọi Groq API, hỗ trợ đổi
+- [x] Implement `Services/GroqProviderService.cs` — gọi Groq API, hỗ trợ đổi
       model qua config
 - [ ] Implement `Services/GeminiProviderService.cs` — gọi Gemini API
 - [ ] Implement `Services/FallbackChainService.cs` — điều phối gọi lần lượt

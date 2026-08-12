@@ -23,7 +23,7 @@
 - [x] Tạo `Services/IAiProviderService.cs` (interface chung cho mọi provider)
 - [x] Implement `Services/GroqProviderService.cs` — gọi Groq API, hỗ trợ đổi
       model qua config
-- [ ] Implement `Services/GeminiProviderService.cs` — gọi Gemini API
+- [x] Implement `Services/GeminiProviderService.cs` — gọi Gemini API
 - [ ] Implement `Services/FallbackChainService.cs` — điều phối gọi lần lượt
       theo đúng thứ tự ở `03-API-SPEC.md` mục 2
 - [ ] Đặt System Prompt cố định trong `Prompts/SystemPrompts.cs` (copy nguyên

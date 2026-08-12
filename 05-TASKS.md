@@ -18,7 +18,7 @@
 ## Phase 1 — Backend: Fallback Chain hoạt động được
 
 - [x] Cài package `Microsoft.Extensions.Http.Polly`
-- [ ] Tạo `Models/ChatRequest.cs`, `Models/ChatResponse.cs`,
+- [x] Tạo `Models/ChatRequest.cs`, `Models/ChatResponse.cs`,
       `Models/MessageDto.cs` theo schema ở `03-API-SPEC.md`
 - [ ] Tạo `Services/IAiProviderService.cs` (interface chung cho mọi provider)
 - [ ] Implement `Services/GroqProviderService.cs` — gọi Groq API, hỗ trợ đổi

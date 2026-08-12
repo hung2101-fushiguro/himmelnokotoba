@@ -17,7 +17,7 @@
 
 ## Phase 1 — Backend: Fallback Chain hoạt động được
 
-- [ ] Cài package `Microsoft.Extensions.Http.Polly`
+- [x] Cài package `Microsoft.Extensions.Http.Polly`
 - [ ] Tạo `Models/ChatRequest.cs`, `Models/ChatResponse.cs`,
       `Models/MessageDto.cs` theo schema ở `03-API-SPEC.md`
 - [ ] Tạo `Services/IAiProviderService.cs` (interface chung cho mọi provider)

@@ -6,13 +6,13 @@
 
 ## Phase 0 — Khởi tạo project
 
-- [ ] Tạo repo Git mới, cấu trúc thư mục `/backend` và `/frontend` theo
+- [x] Tạo repo Git mới, cấu trúc thư mục `/backend` và `/frontend` theo
       `02-ARCHITECTURE.md`
-- [ ] Khởi tạo ASP.NET Core Minimal API project (`dotnet new web`) trong
+- [x] Khởi tạo ASP.NET Core Minimal API project (`dotnet new web`) trong
       `/backend`
-- [ ] Tạo file `.env.example` liệt kê các biến môi trường cần thiết (không
+- [x] Tạo file `.env.example` liệt kê các biến môi trường cần thiết (không
       chứa giá trị thật)
-- [ ] Tạo file `.gitignore` chuẩn cho .NET (đảm bảo `.env`, `bin/`, `obj/`
+- [x] Tạo file `.gitignore` chuẩn cho .NET (đảm bảo `.env`, `bin/`, `obj/`
       không bị commit)
 
 ## Phase 1 — Backend: Fallback Chain hoạt động được

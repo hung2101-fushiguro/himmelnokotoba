@@ -1,0 +1,28 @@
+# Build results
+bin/
+obj/
+
+# Environment / secrets
+.env
+*.env.local
+
+# Node.js / frontend
+node_modules/
+
+# Visual Studio / IDE
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+artifacts/
+
+# .NET
+*.nupkg
+*.snupkg
+.ionide/
+
+# OS
+.DS_Store
+Thumbs.db

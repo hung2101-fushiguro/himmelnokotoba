@@ -30,7 +30,7 @@
 - [x] Đặt System Prompt cố định trong `Prompts/SystemPrompts.cs` (copy nguyên
       văn từ `03-API-SPEC.md` mục 3)
 - [x] Khai báo route `POST /api/chat` trong `Program.cs`
-- [ ] **Test bằng tay** (Postman/curl): gửi request mẫu `"uchi ni"`, xác nhận
+- [x] **Test bằng tay** (Postman/curl): gửi request mẫu `"uchi ni"`, xác nhận
       nhận được response đúng schema
 
 ## Phase 2 — Backend: Xử lý lỗi & CORS

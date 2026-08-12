@@ -25,7 +25,7 @@
       model qua config
 - [x] Implement `Services/GeminiProviderService.cs` — gọi Gemini API
 - [x] Tạo `Prompts/ModelConfig.cs` — nơi duy nhất chứa 4 model ID theo Fallback Chain
-- [ ] Implement `Services/FallbackChainService.cs` — điều phối gọi lần lượt
+- [x] Implement `Services/FallbackChainService.cs` — điều phối gọi lần lượt
       theo đúng thứ tự ở `03-API-SPEC.md` mục 2
 - [x] Đặt System Prompt cố định trong `Prompts/SystemPrompts.cs` (copy nguyên
       văn từ `03-API-SPEC.md` mục 3)

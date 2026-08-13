@@ -1,0 +1,1 @@
+// app.js — stub: code sẽ được implement ở Phase 4

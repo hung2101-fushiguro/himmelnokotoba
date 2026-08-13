@@ -1,0 +1,222 @@
+:root {
+  /* Màu chính - tông thiên thanh, lấy cảm hứng từ mắt/áo choàng Himmel và bầu trời */
+  --himmel-sky: #30AFFF;         /* Xanh thiên thanh đậm - màu chủ đạo, nút bấm, tiêu đề */
+  --himmel-sky-light: #92EEFF;   /* Xanh thiên thanh nhạt - hover state, highlight, gradient */
+  --himmel-sky-dark: #1E7FBF;    /* Xanh đậm hơn - active state, border, text nhấn mạnh */
+
+  /* Màu phụ - vàng nhạt lấy cảm hứng từ tóc Himmel, dùng làm điểm nhấn ấm */
+  --himmel-gold-accent: #F2D48A; /* Vàng nhạt - badge, icon nhỏ, điểm nhấn tương phản với nền xanh */
+
+  /* Nền - tông sáng, trong trẻo */
+  --himmel-bg: #F0FBFF;          /* Nền chính - xanh trắng rất nhạt, dịu mắt khi đọc lâu */
+  --himmel-bg-card: #FFFFFF;     /* Nền thẻ/card chat */
+  --himmel-bg-muted: #E1F6FF;    /* Nền phụ - vùng phân cách, sidebar */
+
+  /* Text */
+  --himmel-text: #1C2E38;        /* Text chính - xanh đen đậm, không dùng đen thuần */
+  --himmel-text-muted: #6B8894;  /* Text phụ - placeholder, timestamp */
+
+  /* Trạng thái */
+  --himmel-success: #4CAF7D;     /* Xanh lá - câu đúng, xác nhận */
+  --himmel-error: #E0687A;       /* Đỏ hồng - lỗi ngữ pháp, cảnh báo */
+
+  /* Bo góc & bóng đổ */
+  --himmel-radius: 12px;
+  --himmel-shadow: 0 2px 12px rgba(48, 175, 255, 0.18);
+}
+
+/* Typography (docs/04-DESIGN-SYSTEM.md mục 3) */
+body {
+  font-family: "Nunito", "Noto Sans JP", sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--himmel-bg);
+  color: var(--himmel-text);
+}
+
+.japanese-text {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.15em;
+}
+
+/* ── Header ── */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: var(--himmel-sky);
+  color: #fff;
+  box-shadow: var(--himmel-shadow);
+  z-index: 1;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.header-icon {
+  flex-shrink: 0;
+}
+
+/* ── Chat container ── */
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.chat-messages {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-message {
+  text-align: center;
+  color: var(--himmel-text-muted);
+  padding: 32px 0;
+}
+
+.welcome-message p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Bong bóng chat ── */
+.chat-bubble-user,
+.chat-bubble-ai {
+  max-width: 75%;
+  padding: 12px 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+/* User: căn phải, gradient xanh, chữ trắng (mục 4) */
+.chat-bubble-user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--himmel-sky), var(--himmel-sky-light));
+  color: #fff;
+  border-radius: var(--himmel-radius) var(--himmel-radius) 4px var(--himmel-radius);
+  box-shadow: var(--himmel-shadow);
+}
+
+/* AI: căn trái, nền trắng, border xanh nhạt, bo góc (mục 4) */
+.chat-bubble-ai {
+  align-self: flex-start;
+  background: var(--himmel-bg-card);
+  color: var(--himmel-text);
+  border: 1px solid var(--himmel-sky-light);
+  border-radius: var(--himmel-radius) var(--himmel-radius) var(--himmel-radius) 4px;
+  box-shadow: var(--himmel-shadow);
+}
+
+/* ── Input area ── */
+.input-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: var(--himmel-bg-card);
+  border-top: 1px solid var(--himmel-sky-light);
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border: 1px solid var(--himmel-sky-light);
+  border-radius: var(--himmel-radius);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+  border-color: var(--himmel-sky);
+}
+
+/* Nút gửi: nền --himmel-sky, chữ trắng, hover --himmel-sky-dark (mục 4) */
+.btn-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: var(--himmel-sky);
+  color: #fff;
+  border: none;
+  border-radius: var(--himmel-radius);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-send:hover {
+  background: var(--himmel-sky-dark);
+}
+
+/* Nút xóa lịch sử */
+.btn-clear {
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  background: transparent;
+  color: var(--himmel-text-muted);
+  border: 1px solid var(--himmel-sky-light);
+  border-radius: var(--himmel-radius);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-clear:hover {
+  color: var(--himmel-error);
+  border-color: var(--himmel-error);
+}
+
+/* ── Mobile responsive (NFR-4, max-width: 600px) ── */
+@media (max-width: 600px) {
+  .app-header {
+    padding: 10px 14px;
+  }
+
+  .app-header h1 {
+    font-size: 1rem;
+  }
+
+  .chat-container {
+    padding: 12px;
+  }
+
+  .chat-bubble-user,
+  .chat-bubble-ai {
+    max-width: 90%;
+    padding: 10px 12px;
+  }
+
+  .input-area {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .chat-input {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .btn-send {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-clear {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+}

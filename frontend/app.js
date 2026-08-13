@@ -4,9 +4,8 @@ const API_URL = "http://localhost:5191/api/chat";
 // Key lưu lịch sử chat trong localStorage (docs/01-PRD.md FR-6)
 const STORAGE_KEY = "himmel-chat-history";
 
-// Lịch sử chat giữ trong bộ nhớ (khởi tạo từ localStorage — Render lịch sử
-// khi load lại trang sẽ làm ở bước sau). Mỗi request gửi TOÀN BỘ lịch sử này
-// lên — đúng nguyên tắc Stateless Backend (docs/02-ARCHITECTURE.md mục 2).
+// Lịch sử chat giữ trong bộ nhớ, mỗi request gửi TOÀN BỘ lịch sử này lên —
+// đúng nguyên tắc Stateless Backend (docs/02-ARCHITECTURE.md mục 2).
 let history = [];
 
 function saveHistory(messages) {
@@ -24,6 +23,109 @@ function loadHistory() {
     return [];
   }
 }
+
+// ── Render (Phase 3 style bubble + Markdown tối giản) ──
+
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// Parse Markdown tối giản tự viết, hỗ trợ: code block, heading, bullet list,
+// **bold**. Nhận input đã escape HTML để tránh XSS.
+function renderMarkdown(text) {
+  const lines = escapeHtml(text).split("\n");
+  const out = [];
+  let inCode = false;
+  let inList = false;
+  const codeBuf = [];
+
+  const closeList = () => {
+    if (inList) {
+      out.push("</ul>");
+      inList = false;
+    }
+  };
+
+  for (const line of lines) {
+    if (line.trim().startsWith("```")) {
+      if (inCode) {
+        out.push(`<pre><code>${codeBuf.join("\n")}</code></pre>`);
+        codeBuf.length = 0;
+        inCode = false;
+      } else {
+        inCode = true;
+      }
+      continue;
+    }
+
+    if (inCode) {
+      codeBuf.push(line);
+      continue;
+    }
+
+    const headingMatch = line.match(/^(#{1,3})\s+(.*)$/);
+    if (headingMatch) {
+      closeList();
+      const level = headingMatch[1].length;
+      out.push(`<h${level}>${headingMatch[2]}</h${level}>`);
+      continue;
+    }
+
+    const bulletMatch = line.match(/^[-*]\s+(.*)$/);
+    if (bulletMatch) {
+      if (!inList) {
+        out.push("<ul>");
+        inList = true;
+      }
+      out.push(`<li>${bulletMatch[1]}</li>`);
+      continue;
+    }
+
+    if (!line.trim()) {
+      closeList();
+      continue;
+    }
+
+    closeList();
+    const bold = line.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    out.push(`<p>${bold}</p>`);
+  }
+
+  if (inCode) {
+    out.push(`<pre><code>${codeBuf.join("\n")}</code></pre>`);
+  }
+  closeList();
+
+  return out.join("\n");
+}
+
+function appendMessage(role, content) {
+  const chatMessages = document.getElementById("chatMessages");
+  const bubble = document.createElement("div");
+  bubble.className = role === "user" ? "chat-bubble-user" : "chat-bubble-ai";
+  bubble.innerHTML = role === "user" ? escapeHtml(content) : renderMarkdown(content);
+  chatMessages.appendChild(bubble);
+
+  const container = document.querySelector(".chat-container");
+  if (container) {
+    container.scrollTop = container.scrollHeight;
+  }
+}
+
+// Render toàn bộ lịch sử cũ khi load lại trang (docs/01-PRD.md FR-6)
+function renderHistory() {
+  if (history.length === 0) return;
+  const chatMessages = document.getElementById("chatMessages");
+  chatMessages.innerHTML = "";
+  for (const msg of history) {
+    appendMessage(msg.role === "assistant" ? "ai" : "user", msg.content);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  history = loadHistory();
+  renderHistory();
+});
 
 async function sendMessage(text) {
   const userMessage = { role: "user", content: text };

@@ -143,10 +143,35 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("clearBtn").addEventListener("click", clearHistory);
 });
 
+// Loading indicator: hiển thị khi đang chờ AI (NFR-3, có thể mất 2-8 giây)
+function showLoading() {
+  const chatMessages = document.getElementById("chatMessages");
+  const loading = document.createElement("div");
+  loading.className = "chat-bubble-ai loading-bubble";
+  loading.id = "loadingBubble";
+  loading.innerHTML = `
+    <span class="loading-text">Himmel đang suy nghĩ</span>
+    <span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`;
+  chatMessages.appendChild(loading);
+}
+
+function hideLoading() {
+  const loading = document.getElementById("loadingBubble");
+  if (loading) loading.remove();
+}
+
+function setSendingState(sending) {
+  document.getElementById("sendBtn").disabled = sending;
+  document.getElementById("userInput").disabled = sending;
+}
+
 async function sendMessage(text) {
   const userMessage = { role: "user", content: text };
   history.push(userMessage);
   saveHistory(history);
+
+  setSendingState(true);
+  showLoading();
 
   try {
     const response = await fetch(API_URL, {
@@ -167,5 +192,8 @@ async function sendMessage(text) {
     }
   } catch (error) {
     console.log("Lỗi gọi API:", error);
+  } finally {
+    hideLoading();
+    setSendingState(false);
   }
 }

@@ -180,6 +180,52 @@ body {
   border-color: var(--himmel-error);
 }
 
+/* ── Loading indicator (NFR-3: chờ AI 2-8 giây) ── */
+.loading-bubble {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.loading-text {
+  color: var(--himmel-text-muted);
+}
+
+.typing-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.typing-dots span {
+  animation: typing-blink 1.4s infinite both;
+  color: var(--himmel-text-muted);
+  font-weight: 700;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing-blink {
+  0%, 80%, 100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Trạng thái disabled khi đang chờ AI trả lời */
+.btn-send:disabled,
+.chat-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ── Mobile responsive (NFR-4, max-width: 600px) ── */
 @media (max-width: 600px) {
   .app-header {

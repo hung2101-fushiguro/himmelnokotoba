@@ -50,8 +50,18 @@ app.UseCors("frontend");
 // POST /api/chat — schema thành công theo docs/03-API-SPEC.md mục 1
 app.MapPost("/api/chat", async (ChatRequest request, FallbackChainService fallback) =>
 {
-    var response = await fallback.GetChatCompletionAsync(request.Messages);
-    return Results.Ok(response);
+    try
+    {
+        var response = await fallback.GetChatCompletionAsync(request.Messages);
+        return Results.Ok(response);
+    }
+    catch (AllProvidersFailedException)
+    {
+        // Response lỗi theo docs/03-API-SPEC.md mục 1: 503 Service Unavailable
+        return Results.Json(
+            new ChatResponse { Success = false, Error = "Hệ thống đang quá tải, vui lòng thử lại sau ít phút." },
+            statusCode: StatusCodes.Status503ServiceUnavailable);
+    }
 });
 
 app.Run();

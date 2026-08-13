@@ -36,9 +36,9 @@
 ## Phase 2 — Backend: Xử lý lỗi & CORS
 
 - [x] Cấu hình CORS chỉ cho phép `ALLOWED_ORIGIN`
-- [ ] Xử lý trường hợp tất cả provider đều fail → trả về đúng
+- [x] Xử lý trường hợp tất cả provider đều fail → trả về đúng
       "Response Body (lỗi)" ở `03-API-SPEC.md`
-- [ ] Thêm logging (console log đủ dùng ở giai đoạn này) ghi lại provider nào
+- [x] Thêm logging (console log đủ dùng ở giai đoạn này) ghi lại provider nào
       được dùng cho mỗi request — để debug Fallback Chain
 
 ## Phase 3 — Frontend: Giao diện cơ bản

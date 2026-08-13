@@ -17,17 +17,20 @@ public class FallbackChainService
     private readonly GroqProviderService _groqFallback;
     private readonly GeminiProviderService _geminiPrimary;
     private readonly GeminiProviderService _geminiFallback;
+    private readonly ILogger<FallbackChainService> _logger;
 
     public FallbackChainService(
         GroqProviderService groqPrimary,
         GroqProviderService groqFallback,
         GeminiProviderService geminiPrimary,
-        GeminiProviderService geminiFallback)
+        GeminiProviderService geminiFallback,
+        ILogger<FallbackChainService> logger)
     {
         _groqPrimary = groqPrimary;
         _groqFallback = groqFallback;
         _geminiPrimary = geminiPrimary;
         _geminiFallback = geminiFallback;
+        _logger = logger;
     }
 
     public async Task<ChatResponse> GetChatCompletionAsync(List<MessageDto> messages)
@@ -49,8 +52,11 @@ public class FallbackChainService
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fallback Chain: TẤT CẢ {ProviderCount} provider đều thất bại, trả lỗi 503 cho Client.", steps.Length);
             throw new AllProvidersFailedException("Tất cả AI Provider đều thất bại.", ex);
         }
+
+        _logger.LogInformation("Fallback Chain: Request thành công, provider đã dùng: {ProviderUsed}.", tracker.ProviderUsed);
 
         var (type, content) = ParseResponse(raw);
         return new ChatResponse
@@ -62,7 +68,7 @@ public class FallbackChainService
         };
     }
 
-    private static async Task<string> ExecuteChainAsync(
+    private async Task<string> ExecuteChainAsync(
         (string Label, Func<CancellationToken, Task<string>> Call)[] steps,
         int index,
         ProviderResultTracker tracker)
@@ -87,7 +93,14 @@ public class FallbackChainService
             var fallback = Policy<string>
                 .Handle<Exception>()
                 .FallbackAsync(
-                    fallbackAction: ct => ExecuteChainAsync(steps, nextIndex, tracker));
+                    fallbackAction: ct => ExecuteChainAsync(steps, nextIndex, tracker),
+                    onFallbackAsync: outcome =>
+                    {
+                        _logger.LogWarning(outcome.Exception,
+                            "Fallback Chain: Provider {FailedProvider} fail/timeout sau {Attempts} lần thử, rớt xuống provider {NextProvider}.",
+                            step.Label, MaxRetries + 1, steps[nextIndex].Label);
+                        return Task.CompletedTask;
+                    });
             policy = fallback.WrapAsync(retry);
         }
 

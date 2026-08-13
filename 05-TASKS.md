@@ -35,7 +35,7 @@
 
 ## Phase 2 — Backend: Xử lý lỗi & CORS
 
-- [ ] Cấu hình CORS chỉ cho phép `ALLOWED_ORIGIN`
+- [x] Cấu hình CORS chỉ cho phép `ALLOWED_ORIGIN`
 - [ ] Xử lý trường hợp tất cả provider đều fail → trả về đúng
       "Response Body (lỗi)" ở `03-API-SPEC.md`
 - [ ] Thêm logging (console log đủ dùng ở giai đoạn này) ghi lại provider nào

@@ -60,9 +60,9 @@ retry + timeout hợp lý ở mỗi bước trước khi rớt xuống provider 
 2️⃣ Groq — model: "openai/gpt-oss-120b"    (Production, ổn định, fallback nội bộ
                                               cùng provider trước khi đổi hẳn provider khác)
         ↓ lỗi
-3️⃣ Gemini — model: "gemini-2.5-flash"
+3️⃣ Gemini — model: "gemini-3.6-flash"
         ↓ lỗi
-4️⃣ Gemini — model: "gemini-2.5-flash-lite" (nhẹ nhất, RPD cao nhất, cứu cánh cuối)
+4️⃣ Gemini — model: "gemini-3.5-flash-lite" (nhẹ nhất, RPD cao nhất, cứu cánh cuối)
         ↓ lỗi
 5️⃣ Trả lỗi thân thiện cho Client (xem Response Body lỗi ở trên)
 ```
@@ -104,10 +104,10 @@ trình độ JLPT N3. Nhiệm vụ của bạn:
 
 ## 4. Biến môi trường cần thiết (Environment Variables)
 
-| Tên biến | Mô tả |
-|---|---|
-| `GROQ_API_KEY` | API key lấy từ console.groq.com |
-| `GEMINI_API_KEY` | API key lấy từ Google AI Studio |
+| Tên biến         | Mô tả                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------- |
+| `GROQ_API_KEY`   | API key lấy từ console.groq.com                                                        |
+| `GEMINI_API_KEY` | API key lấy từ Google AI Studio                                                        |
 | `ALLOWED_ORIGIN` | Domain của Frontend, dùng để cấu hình CORS (vd: `https://himmel-no-kotoba.vercel.app`) |
 
 ## 5. CORS

@@ -43,14 +43,14 @@
 
 ## Phase 3 — Frontend: Giao diện cơ bản
 
-- [ ] Đọc kỹ `04-DESIGN-SYSTEM.md`, khai báo CSS variables trong `style.css`
-- [ ] Dựng layout chat cơ bản trong `index.html` (khung chat, ô input, nút gửi)
-- [ ] Import Google Fonts (Nunito + Noto Sans JP)
-- [ ] Style bong bóng chat user/AI theo Himmel palette
+- [x] Đọc kỹ `04-DESIGN-SYSTEM.md`, khai báo CSS variables trong `style.css`
+- [x] Dựng layout chat cơ bản trong `index.html` (khung chat, ô input, nút gửi)
+- [x] Import Google Fonts (Nunito + Noto Sans JP)
+- [x] Style bong bóng chat user/AI theo Himmel palette
 
 ## Phase 4 — Frontend: Kết nối Backend + localStorage
 
-- [ ] Viết hàm `sendMessage()` trong `app.js` gọi `POST /api/chat`
+- [x] Viết hàm `sendMessage()` trong `app.js` gọi `POST /api/chat`
 - [ ] Viết hàm `loadHistory()` / `saveHistory()` đọc-ghi `localStorage`
 - [ ] Render lịch sử chat khi load lại trang
 - [ ] Thêm nút "Xóa lịch sử" (Clear History) — xóa `localStorage` + xóa UI

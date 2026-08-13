@@ -25,8 +25,10 @@ builder.Services.AddCors(options =>
             // local), tạm cho phép localhost với port bất kỳ để test Frontend chạy
             // trên máy. KHÔNG được dùng fallback này ở môi trường production.
             policy.SetIsOriginAllowed(origin =>
-                Uri.TryCreate(origin, UriKind.Absolute, out var uri) &&
-                (uri.Host is "localhost" or "127.0.0.1"));
+                    Uri.TryCreate(origin, UriKind.Absolute, out var uri) &&
+                    (uri.Host is "localhost" or "127.0.0.1"))
+                .AllowAnyHeader()
+                .AllowAnyMethod();
         }
     });
 });

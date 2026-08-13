@@ -51,7 +51,7 @@
 ## Phase 4 — Frontend: Kết nối Backend + localStorage
 
 - [x] Viết hàm `sendMessage()` trong `app.js` gọi `POST /api/chat`
-- [ ] Viết hàm `loadHistory()` / `saveHistory()` đọc-ghi `localStorage`
+- [x] Viết hàm `loadHistory()` / `saveHistory()` đọc-ghi `localStorage`
 - [ ] Render lịch sử chat khi load lại trang
 - [ ] Thêm nút "Xóa lịch sử" (Clear History) — xóa `localStorage` + xóa UI
 - [ ] Hiển thị loading indicator khi đang chờ AI trả lời (vì có thể mất

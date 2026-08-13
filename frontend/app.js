@@ -122,9 +122,25 @@ function renderHistory() {
   }
 }
 
+// Xóa lịch sử: xóa localStorage + xóa toàn bộ UI (docs/01-PRD.md FR-6)
+function clearHistory() {
+  if (!confirm("Xóa toàn bộ lịch sử chat?")) return;
+
+  history = [];
+  localStorage.removeItem(STORAGE_KEY);
+
+  const chatMessages = document.getElementById("chatMessages");
+  chatMessages.innerHTML = `
+    <div class="welcome-message">
+      <p>Xin chào! Mình là gia sư tiếng Nhật. Hãy nhập câu hỏi bất kỳ bằng Kanji, Hiragana, Katakana, Romaji hoặc tiếng Việt nhé.</p>
+    </div>`;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   history = loadHistory();
   renderHistory();
+
+  document.getElementById("clearBtn").addEventListener("click", clearHistory);
 });
 
 async function sendMessage(text) {
